@@ -3,34 +3,33 @@
     private static void Main(string[] args)
     {
         double[,] mat = new double[5, 3];
-        LerMatriz(mat);
-        MostrarMatriz(mat);
 
-        void LerMatriz(double[,] x)
+        Random sorteio = new Random();
+
+        //Carregar valores na matriz
+        for (int c = 0; c < mat.GetLength(1) - 1; c++)
         {
-            for (int i = 0; i < 5; i++)
+            for (int l = 0; l < mat.GetLength(0); l++)
             {
-                    for (int j = 0; j < 2; j++)
-                    {
-                        Console.WriteLine("Digite o ["+ i + "," + j + "] valor da matriz: ");
-                        x[i, j] = double.Parse(Console.ReadLine());
-                    }
-            }
-            for (int i = 0; i < 5;i++)
-            {
-                x[i,2] = x[i,0] + x[i,1];
+                mat[l, c] = (double)sorteio.Next(1000) / 100;
             }
         }
-        void MostrarMatriz(double[,] y)
+        //Calculo da 3. Coluna
+        Console.WriteLine("Calculando...");
+        for (int l = 0; l < mat.GetLength(0); l ++)
         {
-            for (int i = 0; i < 5; i++)
+            mat[l,2] = (mat[l,0] + mat[l,1]) / 2;
+        }
+
+        //Impressao da matriz
+        Console.WriteLine("Os valores da matriz são: ");
+        for (int l = 0; l < mat.GetLength(0); l++)
+        {
+            for (int c = 0; c < mat.GetLength(1); c++)
             {
-                for (int j = 0; j < 3; j++)
-                {
-                    Console.Write(y[i,j] + " ");
-                }
-                Console.WriteLine();
+                Console.Write(" \tmat["+l+"]["+c + "] =" + mat[l,c].ToString("F2"));
             }
+            Console.WriteLine();
         }
     }
 }
